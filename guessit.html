@@ -38,71 +38,67 @@
         </script>
 </form>
 <form>
-    <div class="container">
-        <p>
-        <label for="form1_color">Guess the color</label>
-        <input type="password" id="form1_color" name="form1_color" value="red">
-        </p>
-        <p>
-        <label for="form1_guess">Enter a Guess</label>
-        <input type="text" id="form1_guess" name="form1_guess">
-        </p>
-        <input type="button" class="button btn-info" onclick="processColor()" value="Enter a guess">
-    </div>    
+  
+
+<form class="mb-4">
+    <div class="mb-3">
+        <label for="secretColor">Guess the color: </label>
+        <input type="password" id="secretColor" value="Red"><br><br>
+    </div>
+    <div class="mb-3">
+        <label for="colorGuess">Enter a guess: </label>
+        <input type="text" id="colorGuess"><br><br>
+    </div>
+    <input type="button" class="btn btn-primary" onclick="processColor()" value="Check the color">
 </form>
 
-<script>
-        let wrong = 0;
-    let attempts = 0;
-function processColor(){
-    console.log("Getting form values")
-    secretcolor=document.getElementById("form1_color").value
-    guess=document.getElementById("form1_guess").value
-    if (secretcolor==guess){
-        alert("You Got it")
-        attempts++
-    }
-    else {
-        alert("That was not it")
-        wrong++
-    }
+
+<p id="result" class="alert alert-info"></p>
+
+<div>
     
-     let out = document.getElementById('result')
-     if (secretcolor==guess) {
-                out.innerHTML = `<p>correct Count: ${attempts}</p>`
-            } else {
-                out.innerHTML = `<p>Wrong Count: ${wrong}</p>`
-            }
-            if(wrong>correct){
-                countwrong();
-            }
-    
-}
-</script>
-<br>
-<div class="container">
-    <img id="myimage" src="plant1.jpg" alt="plant1" onclick="nextImage()" style="height: 200px; width: 200px;">
+    <img id="dessertsImages" class="img-thumbnail" src="plant1.jpg" width="200" height="200" onclick="nextImage()">
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+
+    let attempts = 0;
+    let wrong = 0;
+
+    function processColor() {
+        const secretColor = document.getElementById('secretColor').value.toLowerCase();
+        const colorGuess = document.getElementById('colorGuess').value.toLowerCase();
+
+        attempts++;
+        if (secretColor !== colorGuess) {
+            wrong++;
+            alert("That was not it");
+        } else {
+            alert("You got it!");
+        }
+        document.getElementById('result').innerHTML = `Attempts: ${attempts}, Wrong guesses: ${wrong}`;
+    }
     let showing = 1;
-    function nextImage(){
-        switch(showing){
+    function nextImage() {
+        const img = document.getElementById('dessertsImages');
+        switch (showing) {
             case 1:
-                document.getElementById("myimage").src="plant2.jpg";
-                showing=2;
+                img.src = 'plant1.jpg';
+                showing = 2;
                 break;
             case 2:
-                document.getElementById("myimage").src="plant3.jpg";
-                showing=3;
+                img.src = 'plant2.jpg';
+                showing = 3;
                 break;
             case 3:
-                document.getElementById("myimage").src="plant1.jpg";
-                showing=1;
+                img.src = 'plant3.jpg';
+                showing = 1;
                 break;
         }
     }
-</script>
 
+</script>
 <ul style="background-color: #F5F5DC;">
     <li> <a href="math.html">Math</a></li><br>
     <li> <a href="lunch.html">Lunch</a></li>
